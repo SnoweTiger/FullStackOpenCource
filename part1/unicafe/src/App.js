@@ -8,7 +8,10 @@ const Button = ({handleClick, text}) => (
 )
 
 const StatisticLine = ({text, score}) => (
-  <p>{text} { score }</p>
+  <tr>
+    <td>{text}</td>
+    <td>{ score }</td>
+  </tr>
 )
 
 
@@ -25,13 +28,16 @@ const Statistics = ({title, metrics}) => {
     return (
       <div>
         <h3>{ title }</h3>
-        <StatisticLine text={'Good'} score={metrics.good}/>
-        <StatisticLine text={'Neutral'} score={metrics.neutral}/>
-        <StatisticLine text={'Bad'} score={metrics.bad}/>
 
-        <StatisticLine text={'All'} score={all}/>
-        <StatisticLine text={'Average'} score={average}/>
-        <StatisticLine text={'Percent'} score={percent + '%'}/> 
+        <table>
+          <StatisticLine text={'Good'} score={metrics.good}/>
+          <StatisticLine text={'Neutral'} score={metrics.neutral}/>
+          <StatisticLine text={'Bad'} score={metrics.bad}/>
+
+          <StatisticLine text={'All'} score={all}/>
+          <StatisticLine text={'Average'} score={average}/>
+          <StatisticLine text={'Percent'} score={percent + '%'}/> 
+        </table>
       </div>
     )
   } else {
