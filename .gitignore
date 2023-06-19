@@ -2,6 +2,8 @@
 
 # dependencies
 part1/courseinfo/node_modules
+part1/unicafe/node_modules
+
 /.pnp
 .pnp.js
 
@@ -21,3 +23,5 @@ part1/courseinfo/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+expirements
