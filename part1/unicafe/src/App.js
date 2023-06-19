@@ -13,6 +13,33 @@ const Statistics = ({title, metrics}) => {
   const average = (1 * metrics.good + 0 * metrics.neutral - 1 * metrics.bad) / all
   const percent = metrics.good / all * 100
 
+  console.log('all = ' + all)
+
+  if (all > 0) {
+    return (
+      <div>
+        <h3>{ title }</h3>
+  
+        <p>Good { metrics.good }</p>
+        <p>Neutral { metrics.neutral }</p>
+        <p>Bad { metrics.bad }</p>
+  
+        <p>All { all }</p>
+        <p>Average { average }</p>
+        <p>Percent { percent }%</p>
+  
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h3>{ title }</h3>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
+
   return (
     <div>
       <h3>{ title }</h3>
@@ -37,12 +64,6 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  // const [all, setAll] = useState(0)
-  // const [average, setAverage] = useState(0)
-  // const [percent, setPercent] = useState(0)
-
-
-
   const title = 'Give feedback'
   const stat_title = 'Statistics'
 
@@ -62,9 +83,6 @@ const App = () => {
     good: good,
     neutral: neutral,
     bad: bad,
-    // all: all,
-    // average: average,
-    // percent: percent
   }
 
 
