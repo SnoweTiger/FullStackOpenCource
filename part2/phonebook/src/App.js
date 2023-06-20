@@ -6,9 +6,14 @@ const App = () => {
   ]) 
 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
 
   const addPerson = (event) => {
@@ -18,7 +23,10 @@ const App = () => {
     if (exist) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      const newPerson = {name: newName}
+      const newPerson = {
+        name: newName,
+        number: newNumber
+      }
       setPersons([...persons, newPerson])
     }
   }
@@ -32,6 +40,9 @@ const App = () => {
           name: <input onChange={handleNameChange}/>
         </div>
         <div>
+          number: <input onChange={handleNumberChange}/>
+        </div>
+        <div>
           <button type="submit">add</button>
         </div>
       </form>
@@ -40,7 +51,7 @@ const App = () => {
         <h2>Numbers</h2>
         <ul>
           {persons.map((person, index) => 
-            <li key={index}>{person.name}</li>
+            <li key={index}>{person.name} - {person.number}</li>
           )}
         </ul>
       </div>
