@@ -46,7 +46,11 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      setPersons([...persons, newPerson])
+      
+      axios
+        .post('http://localhost:3001/persons', newPerson).then(response => {
+          setPersons([...persons, response.data])
+      })
     }
   }
 
