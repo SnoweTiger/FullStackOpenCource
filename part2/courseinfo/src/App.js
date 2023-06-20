@@ -1,41 +1,12 @@
-const Header = ({title}) => (
-  <h1>{title}</h1>
-)
+import Course from "./components/Course"
 
-const Part = ({part}) => {
-  return(
-  <li>
-    {part.name} {part.exercises}
-  </li>
-)}
 
-const Content = ({data}) => (
-  <div>
-    <ul>
-      {data.map((part) => (
-          <Part part={part} key={part.id}/>
-        )
-      )}
-    </ul>
-    
-    
-    {/* <Part part={data[1].name} exercises={data[1].exercises}/>
-    <Part part={data[2].name} exercises={data[2].exercises}/> */}
-  </div>
-) 
 
 // const Total = ({total}) => (
 //   <p>Number of exercises {total}</p>
 // )
 
-const Course = ({course}) => {
-  return (
-    <div>
-      <Header title={course.name} />
-      <Content data={course.parts} />
-    </div>   
-  )
-}
+
 
 const App = () => {
 
@@ -61,6 +32,7 @@ const App = () => {
     ]
   }
 
+  // Test course change 
   course.parts.push(
     {
       name: 'Part X',
@@ -72,13 +44,6 @@ const App = () => {
   // const total = course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises
 
   return <Course course={course} />
-  // return (
-  //   <div>
-  //     <Header title={course.name}/>
-  //     <Content data={course.parts}/>
-  //     <Total total={total}/>
-  //   </div>
-  // )
 }
 
 export default App
