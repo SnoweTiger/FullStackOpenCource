@@ -32,6 +32,15 @@ const App = () => {
     setSearchString(event.target.value)
   }
 
+  const handleDelPerson = (id) => {
+    if (window.confirm(`Do you really want person with id ${id}?`)) {
+      personsService.delPerson(id).then(() => {
+        const newPersons = persons.filter(person => person.id !== id)
+        setPersons(newPersons)
+      })
+    }
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
     const exist = persons.some(el => el.name === newName);
@@ -69,7 +78,10 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-      <Numbers persons={personsToShow}/>
+      <Numbers 
+        persons={personsToShow} 
+        delHandler={handleDelPerson}
+      />
 
     </div>
   )
