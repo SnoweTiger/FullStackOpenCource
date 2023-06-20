@@ -5,6 +5,8 @@ import Search from './components/Search'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
 
+import personsService from './services/persons'
+
 const App = () => {
 
   const [persons, setPersons] = useState([])
@@ -12,17 +14,11 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
 
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then((response) => {
-        setPersons(response.data)
-      })
-  }
-
-  useEffect(hook, [])
-
-  
+  useEffect(() => {
+    personsService
+      .getAllPersons()
+      .then(loadedPersons => setPersons(loadedPersons))
+  }, [])
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -46,11 +42,9 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      
-      axios
-        .post('http://localhost:3001/persons', newPerson).then(response => {
-          setPersons([...persons, response.data])
-      })
+
+      personsService.addNewPerson(newPerson)
+        .then(responseData => setPersons([...persons, responseData]))
     }
   }
 
