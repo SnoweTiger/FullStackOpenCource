@@ -67,6 +67,11 @@ const App = () => {
             const newPersons = persons.map(p => p.name === newName ? responseData : p )
             setPersons([...newPersons])
           })
+          .catch(error => {
+            setMessage({text:`Person was already removed from server`, type: 0})
+            setTimeout(() => {setMessage(null)}, 2000)
+            setPersons(persons.filter(p => p.name !== newName))
+          })
       }
     } else {
       personsService.addNewPerson(newPerson)
