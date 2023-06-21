@@ -1,4 +1,4 @@
-
+import WeatherWidget from './Weather'
 
 
 const CountriesList = ({countries, handlerShow}) => {
@@ -18,7 +18,7 @@ const CountriesList = ({countries, handlerShow}) => {
 const CountryDetails = ({countries}) => {
     const country = countries[0]
     const languages = Object.values(country.languages)
-    
+
     return (
         <div>
             <h3>{country.name.common}</h3>
@@ -37,6 +37,10 @@ const CountryDetails = ({countries}) => {
                 src={country.flags.png} 
                 alt={country.flags.alt}
             ></img>
+            <WeatherWidget
+                lat={country.latlng[0]}
+                lon={country.latlng[1]}
+            />
         </div>
     )
 }
