@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 import Search from './components/Search'
 import Form from './components/Form'
@@ -43,17 +42,28 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    const exist = persons.some(el => el.name === newName);
-    if (exist) {
-      alert(`${newName} is already added to phonebook`)
-    } else {
-      const newPerson = {
-        name: newName,
-        number: newNumber
-      }
 
+    const newPerson = {
+      name: newName,
+      number: newNumber,
+    }
+
+    const person = persons.find(person => person.name === newName);
+    if (person) {
+      if (window.confirm(`${newName} is already in the phonebook, replace the old number?`)) {        
+        // console.log('old person data ', person)
+
+        personsService.updatePerson(person.id, newPerson)
+          .then(responseData => {
+            const newPersons = persons.map(p => p.name === newName ? responseData : p )
+            setPersons([...newPersons])
+          })
+      }
+    } else {
       personsService.addNewPerson(newPerson)
-        .then(responseData => setPersons([...persons, responseData]))
+        .then(responseData => {
+          setPersons([...persons, responseData])
+        })
     }
   }
 
