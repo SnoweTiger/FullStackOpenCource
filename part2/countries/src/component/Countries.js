@@ -1,12 +1,14 @@
 
 
 
-const CountriesList = ({countries}) => {
+const CountriesList = ({countries, handlerShow}) => {
+
     return (
         <ul>
             {countries.map(country => 
                 <li>
-                    {country.name.common}
+                    {country.name.common} 
+                    <button onClick={() => handlerShow(country.name.common)}>Show details</button>
                 </li>
             )}
         </ul>
@@ -39,7 +41,7 @@ const CountryDetails = ({countries}) => {
     )
 }
 
-const Countries = ({ countries }) => {
+const Countries = ({ countries, handlerShow }) => {
     if (countries.length > 10) {
         return (
             <div>
@@ -65,7 +67,7 @@ const Countries = ({ countries }) => {
         return (
             <div>
                 <h3>Found countries:</h3>
-                <CountriesList countries={countries} />
+                <CountriesList countries={countries} handlerShow={handlerShow} />
             </div>
         )
     }

@@ -14,6 +14,11 @@ const App = () => {
     setSearchString(e.target.value)
   }
 
+  const handlerShow = (name) => {
+    setSearchString(name)
+    // console.log(name)
+  }
+
   useEffect(() => {
     countriesService
       .getAll()
@@ -37,7 +42,10 @@ const App = () => {
         value={searchString}
         handler={handlerSearchChange}
       />
-      <Countries countries={selectedCountries}/>
+      <Countries 
+        countries={selectedCountries}
+        handlerShow={handlerShow}
+      />
     </div>
   );
 }
