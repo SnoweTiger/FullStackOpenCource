@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Search from './components/Search'
 import Form from './components/Form'
 import Numbers from './components/Numbers'
-
+import Notification from './components/Notification'
 import personsService from './services/persons'
 
 const App = () => {
@@ -12,8 +12,15 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchString, setSearchString] = useState('')
+  
+  const [message, setMessage] = useState(null)
+
+  
 
   useEffect(() => {
+
+    // setMessage({text:'Hi!', type:0})
+
     personsService
       .getAllPersons()
       .then(loadedPersons => setPersons(loadedPersons))
@@ -55,6 +62,8 @@ const App = () => {
 
         personsService.updatePerson(person.id, newPerson)
           .then(responseData => {
+            setMessage({text:`The number of ${responseData.name} was changed`, type:1})
+            setTimeout(() => {setMessage(null)}, 2000)
             const newPersons = persons.map(p => p.name === newName ? responseData : p )
             setPersons([...newPersons])
           })
@@ -62,6 +71,8 @@ const App = () => {
     } else {
       personsService.addNewPerson(newPerson)
         .then(responseData => {
+          setMessage({text:`Added ${responseData.name}`, type:1})
+          setTimeout(() => {setMessage(null)}, 2000)
           setPersons([...persons, responseData])
         })
     }
@@ -77,6 +88,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
 
       <Search handler={handleSearchChange} />
 
