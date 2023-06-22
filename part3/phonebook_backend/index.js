@@ -26,7 +26,7 @@ let persons = [
   }
 ]
   
-app.get('/info', (request, response) => {
+app.get('/info', (_, response) => {
   let dateTime = new Date();
   response.send(200, `<p>Phonebook has info for ${persons.length} persons.</p><p>${dateTime}</p>`) 
 })
@@ -43,6 +43,18 @@ app.get('/api/persons/:id', (request, response) => {
       response.json(person)
   } else {
       response.status(404).end()
+  }
+})
+
+app.delete('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+
+  const person = persons.find(person => person.id === id)
+  if (person) {
+    persons = persons.filter(person => person.id !== id)
+    response.status(204).end()
+  } else {
+    response.status(404).end()
   }
 })
 
