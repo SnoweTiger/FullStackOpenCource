@@ -6,5 +6,9 @@
 GET http://{{host}}/api/persons
 
 ###
+@valid_id = 1
+http://{{host}}/api/persons/{{valid_id}}
 
-
+###
+@invalid_id = 999
+http://{{host}}/api/persons/{{invalid_id}}
