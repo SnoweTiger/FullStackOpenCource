@@ -1,9 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
+
 const app = express()
 
+app.use(cors())
 app.use(express.json())
-// app.use(morgan('tiny'));
 morgan.token('body', (req, _) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :response-time ms :body')); 
 
@@ -63,7 +65,7 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 const generateId = () => {
-  return Math.random().toString(10).slice(2)
+  return parseInt(Math.random().toString(10).slice(2))
 }
 
 app.post('/api/persons', (request, response) => {
@@ -83,7 +85,7 @@ app.post('/api/persons', (request, response) => {
     return response.status(400).json({ 
     error: 'The name already exists in the phonebook' 
     })
-}
+  }
 
   const newPerson = {
       name: body.name,
@@ -92,7 +94,7 @@ app.post('/api/persons', (request, response) => {
   }
 
   persons = persons.concat(newPerson)
-  response.json(persons)
+  response.status(200).json(newPerson).end()
 })
 
 const PORT = 3001
