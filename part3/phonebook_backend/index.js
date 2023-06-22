@@ -58,6 +58,30 @@ app.delete('/api/persons/:id', (request, response) => {
   }
 })
 
+const generateId = () => {
+  return Math.random().toString(10).slice(2)
+}
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+
+  console.log(body)
+
+  // if (!body.name || !body.number) {
+  //     return response.status(400).json({ 
+  //     error: 'content missing' 
+  //     })
+  // }
+
+  const newPerson = {
+      name: body.name,
+      number: body.number,
+      id: generateId(),
+  }
+
+  persons = persons.concat(newPerson)
+  response.json(persons)
+})
 
 const PORT = 3001
 app.listen(PORT, () => {
