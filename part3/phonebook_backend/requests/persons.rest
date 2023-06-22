@@ -22,7 +22,7 @@ DELETE http://{{host}}/api/persons/{{valid_id}}
 DELETE http://{{host}}/api/persons/{{invalid_id}}
 
 ###
-@name="Mike"
+@name="Mike6"
 @number="+123-123-123-3"
 POST http://{{host}}/api/persons HTTP/1.1
 Content-Type: application/json
