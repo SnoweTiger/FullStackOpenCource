@@ -1,8 +1,10 @@
 @hostname = localhost
 @port = 3001
 @host = {{hostname}}:{{port}}
-@valid_id = 6495d855cac8edc5e9d92e1f
+@valid_id = 6495d828cac8edc5e9d92e1c
 @inval_id = 6495a6c6e2eaf1f02ac062df
+@name="Mike6"
+@number="666"
 
 ###
 GET http://{{host}}/api/persons
@@ -19,9 +21,16 @@ DELETE http://{{host}}/api/persons/{{valid_id}}
 ### Delete
 DELETE http://{{host}}/api/persons/{{inval_id}}
 
+### Update
+PUT http://{{host}}/api/persons/{{valid_id}}
+Content-Type: application/json
+
+{
+    "name":{{name}},
+    "number":{{number}}
+}
+
 ###
-@name="Mike6"
-@number="+123-123-123-3"
 POST http://{{host}}/api/persons HTTP/1.1
 Content-Type: application/json
 
