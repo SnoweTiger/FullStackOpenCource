@@ -10,9 +10,11 @@ part2/courseinfo/node_modules
 part2/notes
 
 part2/countries/node_modules
-part3/backend/node_modules
-part3/backend
-part3/phonebook_backend/node_modules
+
+
+
+# part3/backend/node_modules
+# part3/phonebook_backend/node_modules
 
 /.pnp
 .pnp.js
