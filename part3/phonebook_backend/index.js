@@ -17,10 +17,10 @@ morgan.token('body', (req, _) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :response-time ms :body')); 
 
 
-  
+// Just done =) 
 app.get('/info', (_, response) => {
-  let dateTime = new Date();
   Person.find({}).then(persons => {
+    const dateTime = new Date();
     const count = persons.length
     response.send(200, `<p>Phonebook has info for ${count} persons.</p><p>${dateTime}</p>`) 
   })
@@ -32,6 +32,7 @@ app.get('/api/persons', (_, response) => {
   })
 })
 
+// Just done =)
 app.get('/api/persons/:id', (request, response, next) => {
 
   Person.findById(request.params.id)
