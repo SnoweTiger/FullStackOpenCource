@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const Person = require('./models/persons')
-const persons = require('./models/persons')
 
 
 
@@ -13,16 +12,16 @@ const app = express()
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
-morgan.token('body', (req, _) => JSON.stringify(req.body));
-app.use(morgan(':method :url :status :response-time ms :body')); 
+morgan.token('body', (req, _) => JSON.stringify(req.body))
+app.use(morgan(':method :url :status :response-time ms :body'))
 
 
-// Just done =) 
+// Just done =)
 app.get('/info', (_, response) => {
   Person.find({}).then(persons => {
-    const dateTime = new Date();
+    const dateTime = new Date()
     const count = persons.length
-    response.send(200, `<p>Phonebook has info for ${count} persons.</p><p>${dateTime}</p>`) 
+    response.send(200, `<p>Phonebook has info for ${count} persons.</p><p>${dateTime}</p>`)
   })
 })
 
@@ -68,10 +67,10 @@ app.put('/api/persons/:id', (request, response, next) => {
   }
 
   Person.findByIdAndUpdate(
-      request.params.id, 
-      person, 
-      { new: true, runValidators: true, context: 'query' }
-    )
+    request.params.id,
+    person,
+    { new: true, runValidators: true, context: 'query' }
+  )
     .then(updatedPerson => {
       response.json(updatedPerson)
     })
@@ -84,21 +83,21 @@ app.post('/api/persons', (request, response, next) => {
   console.log('Add person', body)
 
   if (!body.name || !body.number) {
-      return response.status(400).json({ 
-      error: 'The name or number is missing' 
-      })
+    return response.status(400).json({
+      error: 'The name or number is missing'
+    })
   }
 
   // const existedPerson = persons.find(person => person.name === body.name);
   // if (existedPerson) {
-  //   return response.status(400).json({ 
-  //   error: 'The name already exists in the phonebook' 
+  //   return response.status(400).json({
+  //   error: 'The name already exists in the phonebook'
   //   })
   // }
 
   const newPerson = new Person ({
-      name: body.name,
-      number: body.number,
+    name: body.name,
+    number: body.number,
   })
 
   newPerson.save()
@@ -121,7 +120,7 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
-  } 
+  }
 
   next(error)
 }
@@ -130,5 +129,5 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
