@@ -1,24 +1,24 @@
 @hostname = localhost
 @port = 3001
 @host = {{hostname}}:{{port}}
+@valid_id = 6495a6c6e2eaf1f02ac062dc
+@inval_id = 6495a6c6e2eaf1f02ac062df
 
 ###
 GET http://{{host}}/api/persons
 
-###
-@valid_id = 1
+### Get person
 GET http://{{host}}/api/persons/{{valid_id}}
 
-###
-@invalid_id = 999
-GET http://{{host}}/api/persons/{{invalid_id}}
+### Get person
+GET http://{{host}}/api/persons/{{inval_id}}
 
-###
-@valid_id = 1
+### Get person
+# @valid_id = 1
 DELETE http://{{host}}/api/persons/{{valid_id}}
 
-###
-@invalid_id = 999
+### Delete
+# @invalid_id = 999
 DELETE http://{{host}}/api/persons/{{invalid_id}}
 
 ###
