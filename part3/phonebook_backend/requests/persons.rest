@@ -4,6 +4,7 @@
 @valid_id = 6495d828cac8edc5e9d92e1c
 @inval_id = 6495a6c6e2eaf1f02ac062df
 @name="Mike6"
+@invalname="Mi"
 @number="666"
 
 ###
@@ -30,11 +31,29 @@ Content-Type: application/json
     "number":{{number}}
 }
 
+### Update
+PUT http://{{host}}/api/persons/{{valid_id}}
+Content-Type: application/json
+
+{
+    "name":{{invalname}},
+    "number":{{number}}
+}
+
 ###
 POST http://{{host}}/api/persons HTTP/1.1
 Content-Type: application/json
 
 {
     "name":{{name}},
+    "number":{{number}}
+}
+
+###
+POST http://{{host}}/api/persons HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":{{invalname}},
     "number":{{number}}
 }

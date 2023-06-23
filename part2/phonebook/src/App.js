@@ -18,9 +18,6 @@ const App = () => {
   
 
   useEffect(() => {
-
-    // setMessage({text:'Hi!', type:0})
-
     personsService
       .getAllPersons()
       .then(loadedPersons => setPersons(loadedPersons))
@@ -58,7 +55,6 @@ const App = () => {
     const person = persons.find(person => person.name === newName);
     if (person) {
       if (window.confirm(`${newName} is already in the phonebook, replace the old number?`)) {        
-        // console.log('old person data ', person)
 
         personsService.updatePerson(person.id, newPerson)
           .then(responseData => {
@@ -68,7 +64,9 @@ const App = () => {
             setPersons([...newPersons])
           })
           .catch(error => {
-            setMessage({text:`Person was already removed from server`, type: 0})
+            console.log(error.response.data.error)
+            // setMessage({text:`Person was already removed from server`, type: 0})
+            setMessage({text: error.response.data.error, type:0})
             setTimeout(() => {setMessage(null)}, 2000)
             setPersons(persons.filter(p => p.name !== newName))
           })
@@ -79,6 +77,11 @@ const App = () => {
           setMessage({text:`Added ${responseData.name}`, type:1})
           setTimeout(() => {setMessage(null)}, 2000)
           setPersons([...persons, responseData])
+        })
+        .catch(error => {
+          setMessage({text: error.response.data.error, type:0})
+          setTimeout(() => {setMessage(null)}, 2000)
+          console.log(error.response.data.error)
         })
     }
   }
