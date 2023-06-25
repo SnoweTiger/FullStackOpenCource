@@ -90,3 +90,27 @@ describe('topBlog', () => {
           })
     })
 })
+
+describe('mostBlogs', () => {
+    test('when list of blogs is empty', () => {
+        const result = listHelper.mostBlogs(blog_empty)
+        expect(result).toBe(null)
+    })
+
+    test('when list has only one blog with 5 likes', () => {
+        const result = listHelper.mostBlogs(blog_1entities_5likes)
+        expect(result).toEqual({
+            author: blog_1entities_5likes[0].author,
+            blogs: 1
+          })
+    })
+
+    test('when list has many blog with 12 likes total', () => {
+        const result = listHelper.mostBlogs(blog_3entities_12likes)
+        expect(result).toEqual({
+            author: blog_3entities_12likes[1].author,
+            blogs: 2
+          })
+    })
+
+})

@@ -24,9 +24,36 @@ const favoriteBlog = (blogs) => {
   }
 }
 
+const mostBlogs = (blogs) => {
+
+  if (blogs.length === 0) {
+    return null
+  }
+
+  const authorsBlogs = blogs.reduce((authors, {author, likes}) => {
+    authors[author] = authors[author] || 0
+    authors[author] += 1
+    return authors
+  }, {})
+
+  const mostBlogs = Math.max(...Object.values(authorsBlogs))
+  const mostAuthor = Object.keys(authorsBlogs).find(key => authorsBlogs[key] === mostBlogs);
+
+
+  return {
+    author: mostAuthor,
+    blogs: mostBlogs
+  }
+}
+
+  
+
+
+
 module.exports = {
   dummy, 
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs 
 }
 
