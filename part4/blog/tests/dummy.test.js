@@ -1,15 +1,6 @@
 const listHelper = require('../utils/list_helper')
 
-test('dummy returns one', () => {
-  const blogs = []
-
-  const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
-})
-
-describe('totalLikes', () => {
-
-    const blog_empty = []
+const blog_empty = []
 
     const blog_1entities_5likes = [
         {
@@ -48,7 +39,16 @@ describe('totalLikes', () => {
           __v: 0
         },  
     ]
-    
+
+test('dummy returns one', () => {
+  const blogs = []
+
+  const result = listHelper.dummy(blogs)
+  expect(result).toBe(1)
+})
+
+describe('totalLikes', () => {
+
     test('when list of blogs is empty', () => {
         const result = listHelper.totalLikes(blog_empty)
         expect(result).toBe(0)
@@ -62,5 +62,31 @@ describe('totalLikes', () => {
     test('when list has many blog with 12 likes total', () => {
         const result = listHelper.totalLikes(blog_3entities_12likes)
         expect(result).toBe(12)
+    })
+})
+
+describe('topBlog', () => {
+
+    test('when list of blogs is empty', () => {
+        const result = listHelper.favoriteBlog(blog_empty)
+        expect(result).toBe(null)
+    })
+
+    test('when list has only one blog with 5 likes', () => {
+        const result = listHelper.favoriteBlog(blog_1entities_5likes)
+        expect(result).toEqual({
+            title: blog_1entities_5likes[0].title,
+            author: blog_1entities_5likes[0].author,
+            likes: blog_1entities_5likes[0].likes
+          })
+    })
+
+    test('when list has many blog with 12 likes total', () => {
+        const result = listHelper.favoriteBlog(blog_3entities_12likes)
+        expect(result).toEqual({
+            title: blog_3entities_12likes[0].title,
+            author: blog_3entities_12likes[0].author,
+            likes: blog_3entities_12likes[0].likes
+          })
     })
 })
