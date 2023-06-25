@@ -35,7 +35,7 @@ const blog_empty = []
           title: "Canonical string reduction",
           author: "Edsger W. Dijkstra",
           url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-          likes: 0,
+          likes: 3,
           __v: 0
         },  
     ]
@@ -61,7 +61,7 @@ describe('totalLikes', () => {
 
     test('when list has many blog with 12 likes total', () => {
         const result = listHelper.totalLikes(blog_3entities_12likes)
-        expect(result).toBe(12)
+        expect(result).toBe(15)
     })
 })
 
@@ -110,6 +110,30 @@ describe('mostBlogs', () => {
         expect(result).toEqual({
             author: blog_3entities_12likes[1].author,
             blogs: 2
+          })
+    })
+
+})
+
+describe('mostLikes', () => {
+    test('when list of blogs is empty', () => {
+        const result = listHelper.mostLikes(blog_empty)
+        expect(result).toBe(null)
+    })
+
+    test('when list has only one blog with 5 likes', () => {
+        const result = listHelper.mostLikes(blog_1entities_5likes)
+        expect(result).toEqual({
+            author: blog_1entities_5likes[0].author,
+            likes: 5
+          })
+    })
+
+    test('when list has many blog with 12 likes total', () => {
+        const result = listHelper.mostLikes(blog_3entities_12likes)
+        expect(result).toEqual({
+            author: blog_3entities_12likes[1].author,
+            likes: 8
           })
     })
 
