@@ -6,7 +6,7 @@ const api = supertest(app)
 
 const Blog = require('../models/blog')
 
-const { initialBlogs } = require('./test_helper')
+const { initialBlogs, blogInDb } = require('./test_helper')
 
 
 beforeEach(async () => {
@@ -31,6 +31,30 @@ test('unique identifier property of the blog posts is named id', async () => {
     // console.log(response.body)
     expect(response.body[0].id).toBeDefined()
 })
+
+test('a valid blog can be added', async () => {
+    const newBlog = {
+        title: "Test title",
+        author: "Test author",
+        url: "test url",
+        likes: 333,
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  
+    const blogsAtEnd = await blogInDb()
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
+  
+    expect(blogsAtEnd.map(n => n.title)).toContain('Test title')
+    expect(blogsAtEnd.map(n => n.author)).toContain('Test author')
+    expect(blogsAtEnd.map(n => n.url)).toContain('test url')
+})
+
+
 
 
 afterAll(async () => {
