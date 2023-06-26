@@ -54,7 +54,23 @@ test('a valid blog can be added', async () => {
     expect(blogsAtEnd.map(n => n.url)).toContain('test url')
 })
 
-
+test('check if like is undefined', async () => {
+    const newBlog = {
+        title: "Test title",
+        author: "Test author",
+        url: "test url"
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  
+    const blogsAtEnd = await blogInDb()
+    console.log(blogsAtEnd)
+    expect(blogsAtEnd.map(n => n.likes)).toContain(0)
+})
 
 
 afterAll(async () => {
