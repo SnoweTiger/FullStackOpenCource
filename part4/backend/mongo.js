@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 // }
 // const password = process.argv[2]
 
-const url =`mongodb://localhost:27017/notes`
+const url =`mongodb://localhost:27017/test_notes`
 //   `mongodb+srv://snowetiger:${password}@cluster0.z2gppil.mongodb.net/?retryWrites=true&w=majority`
   
 
@@ -42,14 +42,15 @@ const note3 = new Note({
 })
 note3.save().then(result => {
   console.log('note saved!')
-})
-
-Note.find({}).then(result => {
-  result.forEach(note => {
-    console.log(note)
-  })
   mongoose.connection.close()
 })
+
+// Note.find({}).then(result => {
+//   result.forEach(note => {
+//     console.log(note)
+//   })
+  
+// })
 
 
 // docker run -d -p 27017:27017 --name mongo-test2 -e MONGODB_INITDB_ROOT_USERNAME=sam -e MONGODB_INITDB_ROOT_PASSWORD=sam mongo:latest

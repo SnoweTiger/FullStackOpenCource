@@ -22,5 +22,5 @@ test('palindrome of react', () => {
     //palindrome
     const result = reverse('react')
   
-    expect(result).toBe('tkaer')
+    expect(result).toBe('tcaer')
   })
