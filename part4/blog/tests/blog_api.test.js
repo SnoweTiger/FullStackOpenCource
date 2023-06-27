@@ -117,6 +117,24 @@ describe('deletion of a blog', () => {
     })
 })
 
+describe('update of a blog', () => {
+
+    test('update blog can be delete', async () => {
+        const blogAtStart = await blogInDb()
+        const blogToUpdate = blogAtStart[0]
+        blogToUpdate.title = 'Test title'
+
+        await api
+            .put(`/api/blogs/${blogToUpdate.id}`)
+            .send(blogToUpdate)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+  
+        const blogsAtEnd = await blogInDb()
+        expect(blogsAtEnd.map(n => n.title)).toContain('Test title')
+
+    })
+})
 
 
 

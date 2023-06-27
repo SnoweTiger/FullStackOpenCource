@@ -2,7 +2,7 @@
 @port = 3003
 @host = {{hostname}}:{{port}}
 
-@id = 1
+@id = 649b1d62ab142576378b7910
 @inval_id = 1
 
 ###
@@ -10,6 +10,17 @@ GET http://{{host}}/api/blogs HTTP/1.1
 
 ###
 POST http://{{host}}/api/blogs HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Test title",
+    "author": "Test author",
+    "url": "Test URI",
+    "likes": 5
+}
+
+###
+PUT http://{{host}}/api/blogs/{{id}} HTTP/1.1
 Content-Type: application/json
 
 {
