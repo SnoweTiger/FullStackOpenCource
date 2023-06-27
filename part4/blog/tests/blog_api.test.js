@@ -16,7 +16,7 @@ beforeEach(async () => {
     const promiseArray = blogObjects.map(blog => blog.save())
     await Promise.all(promiseArray)
 })
-  
+
 test('notes are returned as json', async () => {
     const response = await api
       .get('/api/blogs')
@@ -72,6 +72,29 @@ test('check if like is undefined', async () => {
     expect(blogsAtEnd.map(n => n.likes)).toContain(0)
 })
 
+test('check code 400 if no title or url', async () => {
+    const newBlog = {
+        author: "Test author",
+        url: "test url",
+        likes: 0
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+
+      const newBlog2 = {
+        title: "Test title",
+        author: "Test author",
+        likes: 0
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog2)
+      .expect(400)
+})
 
 afterAll(async () => {
     await mongoose.connection.close()
