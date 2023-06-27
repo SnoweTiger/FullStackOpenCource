@@ -96,6 +96,31 @@ test('check code 400 if no title or url', async () => {
       .expect(400)
 })
 
+describe('deletion of a blog', () => {
+
+    test('existed blog can be delete', async () => {
+        const blogAtStart = await blogInDb()
+        const blogToDelete = blogAtStart[0]
+      
+        await api
+          .delete(`/api/blogs/${blogToDelete.id}`)
+          .expect(204)
+      
+        const blogsAtEnd = await blogInDb()
+      
+        expect(blogsAtEnd).toHaveLength(
+          initialBlogs.length - 1
+        )
+      
+        const titles = blogsAtEnd.map(r => r.title)
+        expect(titles).not.toContain(blogToDelete.title)
+    })
+})
+
+
+
+
+
 afterAll(async () => {
     await mongoose.connection.close()
 })
