@@ -1,5 +1,5 @@
 @hostname = localhost
-@port = 3003
+@port = 3001
 @host = {{hostname}}:{{port}}
 
 @id = 649b1d62ab142576378b7910
@@ -11,13 +11,13 @@ GET http://{{host}}/api/blogs HTTP/1.1
 ###
 POST http://{{host}}/api/blogs HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdGVzdCIsImlkIjoiNjQ5YzYwNzlkNzY4NGE1MDAwYWYzYTAxIiwiaWF0IjoxNjg3OTcwNzUwLCJleHAiOjE2ODc5NzQzNTB9.skLmtTKNfwq57BmiSuH06D8IZKivk53dApipAKsMRLw 
 
 {
-    "title": "Test title",
+    "title": "Test title user",
     "author": "Test author",
     "url": "Test URI",
-    "likes": 5,
-    "userId": "649bd50e83d1cc6c474ff53e"
+    "likes": 5
 }
 
 ###
