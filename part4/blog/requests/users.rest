@@ -7,7 +7,37 @@
 ### GET all users
 GET http://{{host}}/api/users HTTP/1.1
 
-### POST create new user
+### POST create new valid user
+POST http://{{host}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "test",
+    "name": "TestName",
+    "password": "test_pass"
+}
+
+### POST create new invalid user
+POST http://{{host}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "te",
+    "name": "TestName",
+    "password": "test_pass"
+}
+
+### POST create new invalid user
+POST http://{{host}}/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "test",
+    "name": "TestName",
+    "password": "te"
+}
+
+### POST create new ununique valid user
 POST http://{{host}}/api/users HTTP/1.1
 Content-Type: application/json
 
