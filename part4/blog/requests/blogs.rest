@@ -5,8 +5,8 @@
 @inval_id = 1
 
 
-@id = 649c6d0376db4e0f931c44b6
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdGVzdCIsImlkIjoiNjQ5YzYwNzlkNzY4NGE1MDAwYWYzYTAxIiwiaWF0IjoxNjg3OTcwNzUwLCJleHAiOjE2ODc5NzQzNTB9.skLmtTKNfwq57BmiSuH06D8IZKivk53dApipAKsMRLw 
+@id = 649c79c02937dcb6fd9f4ce9
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RfdGVzdCIsImlkIjoiNjQ5YzYwNzlkNzY4NGE1MDAwYWYzYTAxIiwiaWF0IjoxNjg3OTc2MzY2LCJleHAiOjE2ODc5Nzk5NjZ9.HDZf1mYccClr1dg67U9J37qH-_pNqrWnarjZinUZ3SQ
 
 ###
 GET http://{{host}}/api/blogs HTTP/1.1
