@@ -5,7 +5,7 @@ import User from './User'
 import Blogs from './Blogs'
 
 
-const Content = ({ user, setUser }) => {
+const Content = ({ user, setUser, setMessage }) => {
     const [blogs, setBlogs] = useState([])
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const Content = ({ user, setUser }) => {
     return (
         <div>
             <User user={user} setUser={setUser} />
-            <BlogForm blogs={blogs} setBlogs={setBlogs} />
+            <BlogForm blogs={blogs} setBlogs={setBlogs} setMessage={setMessage}/>
             <Blogs blogs={blogs} />
         </div>
 )}
