@@ -53,7 +53,7 @@ const Content = ({ user, setUser, setMessage }) => {
                 />
             </Togglable>
             
-            <Blogs blogs={blogs} />
+            <Blogs blogs={blogs} setBlogs={setBlogs}/>
         </div>
 )}
   
