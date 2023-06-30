@@ -1,7 +1,7 @@
 import { useState } from "react"
 import blogService from '../services/blogs'
 
-const Blog = ({blog, likeHandler}) => {
+const Blog = ({ blog, likeHandler, deleteHandler, userName }) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -10,7 +10,7 @@ const Blog = ({blog, likeHandler}) => {
   const toggleDetails = () => {
     setVisible(!visible)
   }
-
+  console.log(userName, blog.user.name)
   return (
     <div>
       <div style={hideWhenVisible}>
@@ -22,13 +22,17 @@ const Blog = ({blog, likeHandler}) => {
         <p>Author: {blog.author}</p>
         <p>Likes: {blog.likes}<button onClick={() => likeHandler(blog.id)}>Like it!</button></p>
         <p>User: {blog.user.name}</p>
+        {userName === blog.user.name && <button onClick={() => deleteHandler(blog.id)}>Delete</button>}
+        
         <button onClick={toggleDetails}>Close</button>
       </div>
     </div>
   )
 }
 
-const Blogs = ({ blogs, setBlogs }) => {
+const Blogs = ({ blogs, setBlogs, user }) => {
+
+  // console.log(user)
 
   const likeHandler = (id) => {
     
@@ -46,12 +50,30 @@ const Blogs = ({ blogs, setBlogs }) => {
           .updateBlog(id, blogObject)
           .then(returnedBlog => {
             let tmpBlogs = blogs.map(b => b.id === id ? returnedBlog : b)
-            // tmpBlogs = 
             setBlogs(tmpBlogs.sort((a,b) => b.likes - a.likes))
         })
+
+    
   }
 
-  return blogs.map(blog => <Blog key={blog.id} blog={blog} likeHandler={likeHandler}/>)
+  const deleteHandler = (id) => {
+    // console.log(id, user.name)
+
+    blogService.deleteBlog(id).then(returnedBlog => {
+      setBlogs(blogs.filter(b => b.id !== id))
+    })
+
+  }
+
+  return blogs.map(blog => 
+    <Blog 
+      key={blog.id} 
+      blog={blog} 
+      likeHandler={likeHandler} 
+      deleteHandler={deleteHandler} 
+      userName={user.name}
+    />
+  )
 }
 
 export default Blogs
