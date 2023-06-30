@@ -84,7 +84,7 @@ test('check code 400 if no title or url', async () => {
       .send(newBlog)
       .expect(400)
 
-      const newBlog2 = {
+    const newBlog2 = {
         title: "Test title",
         author: "Test author",
         likes: 0

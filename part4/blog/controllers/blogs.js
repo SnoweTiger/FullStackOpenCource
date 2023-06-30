@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 const Blog = require('../models/blog')
 const User = require('../models/user')
-
-
+const { userExtractor } = require('../utils/middleware')
+ 
 
 blogRouter.get('/', async (request, response) => {
     const blogs = await Blog
@@ -13,7 +13,7 @@ blogRouter.get('/', async (request, response) => {
     response.json(blogs)  
 })
   
-blogRouter.post('/', async (request, response) => {
+blogRouter.post('/', userExtractor, async (request, response) => {
     const body = request.body
 
     const blog = new Blog({
@@ -28,7 +28,7 @@ blogRouter.post('/', async (request, response) => {
     response.status(201).json(savedBlog)
 })
 
-blogRouter.delete('/:id', async (request, response, next) => {
+blogRouter.delete('/:id', userExtractor, async (request, response, next) => {
   
   const blog = await Blog.findById(request.params.id)
 
