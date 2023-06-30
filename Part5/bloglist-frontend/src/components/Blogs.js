@@ -14,7 +14,7 @@ const Blog = ({blog, likeHandler}) => {
   return (
     <div>
       <div style={hideWhenVisible}>
-        {blog.title}
+        {blog.title} - likes:{blog.likes}
         <button onClick={toggleDetails}>Details</button>
       </div>
       <div style={showWhenVisible}>
@@ -45,8 +45,9 @@ const Blogs = ({ blogs, setBlogs }) => {
     blogService
           .updateBlog(id, blogObject)
           .then(returnedBlog => {
-            const tmpBlogs = blogs.map(b => b.id === id ? returnedBlog : b);
-            setBlogs(tmpBlogs)
+            let tmpBlogs = blogs.map(b => b.id === id ? returnedBlog : b)
+            // tmpBlogs = 
+            setBlogs(tmpBlogs.sort((a,b) => b.likes - a.likes))
         })
   }
 
