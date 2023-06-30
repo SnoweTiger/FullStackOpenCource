@@ -21,8 +21,8 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-        {user !== null && <Content user={user} setUser={setUser}/>}
-        {user === null && <LoginForm setUser={setUser} />}
+      {user !== null && <Content user={user} setUser={setUser}/>}
+      {user === null && <LoginForm setUser={setUser} />}
     </div>
   )
 }
