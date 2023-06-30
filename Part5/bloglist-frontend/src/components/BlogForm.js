@@ -1,37 +1,7 @@
 import { useState } from "react"
 import blogService from '../services/blogs'
 
-const BlogForm = ({ blogs, setBlogs, setMessage }) => {
-
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
-  
-  const addNewBlog = (event) => {
-    event.preventDefault()
-    // console.log(title, author, url)
-
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url,
-      likes: 0
-    }
-
-    blogService
-      .createBlog(blogObject)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setTitle('')
-        setAuthor('')
-        setUrl('')
-        setMessage({text: "Add blog", type:1})
-        setTimeout(() => {
-          setMessage(null)
-        }, 5000)
-    })
-  }
-  
+const BlogForm = ({ addNewBlog, title, setTitle, author, setAuthor, url, setUrl }) => {
   return (
     <div>
       <form onSubmit={addNewBlog}>
