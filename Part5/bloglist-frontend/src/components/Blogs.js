@@ -1,33 +1,5 @@
-import { useState } from 'react'
 import blogService from '../services/blogs'
-
-const Blog = ({ blog, likeHandler, deleteHandler, userName }) => {
-    const [visible, setVisible] = useState(false)
-
-    const hideWhenVisible = { display: visible ? 'none' : '' }
-    const showWhenVisible = { display: visible ? '' : 'none' }
-
-    const toggleDetails = () => {
-        setVisible(!visible)
-    }
-    console.log(userName, blog.user.name)
-    return (
-        <div>
-            <div style={hideWhenVisible}>
-                {blog.title} - likes:{blog.likes}
-                <button onClick={toggleDetails}>Details</button>
-            </div>
-            <div style={showWhenVisible}>
-                <p>Title: {blog.title} </p>
-                <p>Author: {blog.author}</p>
-                <p>Likes: {blog.likes}<button onClick={() => likeHandler(blog.id)}>Like it!</button></p>
-                <p>User: {blog.user.name}</p>
-                {userName === blog.user.name && <button onClick={() => deleteHandler(blog.id)}>Delete</button>}
-                <button onClick={toggleDetails}>Close</button>
-            </div>
-        </div>
-    )
-}
+import Blog from './Blog'
 
 const Blogs = ({ blogs, setBlogs, user }) => {
 
