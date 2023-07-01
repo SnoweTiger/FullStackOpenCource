@@ -8,21 +8,19 @@ import Blog from './Blog'
 describe('Test Blog component', () => {
 
     let container
+    const mockLikeHandler = jest.fn()
+    const mockDeleteHandler = jest.fn()
+    const userName = 'Test User'
+    const blog = {
+        id: '',
+        title: 'Test Title',
+        author: 'Test Author',
+        url: 'test_url',
+        likes: 333,
+        user: { name: userName }
+    }
 
     beforeEach(() => {
-
-        const userName = 'Test User'
-        const blog = {
-            id: '',
-            title: 'Test Title',
-            author: 'Test Author',
-            url: 'test_url',
-            likes: 333,
-            user: { name: userName }
-        }
-
-        const mockLikeHandler = jest.fn()
-        const mockDeleteHandler = jest.fn()
 
         container = render(
             <Blog
@@ -56,29 +54,16 @@ describe('Test Blog component', () => {
         const div = container.querySelector('.BlogDetails')
         expect(div).not.toHaveStyle('display: none')
     })
+
+    test('check 2 clicks on likes button', async () => {
+        const user = userEvent.setup()
+        const button = screen.getByText('Details')
+        await user.click(button)
+
+        const likesButton = screen.getByText('Like it!')
+        await userEvent.click(likesButton)
+        await userEvent.click(likesButton)
+
+        expect(mockLikeHandler.mock.calls).toHaveLength(2)
+    })
 })
-
-// test('renders blog', () => {
-
-    
-
-//     render(
-        
-//     )
-
-//     screen.debug()
-
-
-
-//     const authorElement = screen.findByText('Test Author')
-//     expect(authorElement).toBeDefined()
-
-//     const urlElement = screen.findByText('test_url').closest("div")
-//     expect(urlElement).toHaveStyle('display: none')
-//     //.not.toBeDefined()
-
-//     const likesElement = screen.findByText(333)
-//     expect(likesElement.closest("div")).toHaveStyle('display: none')
-//     //.not.toBeDefined()
-
-// })
