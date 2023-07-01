@@ -14,30 +14,38 @@ const Content = ({ user, setUser, setMessage }) => {
 
     useEffect(() => {
         blogService.getAll().then(blogs =>
-          setBlogs( blogs.sort((a,b) => b.likes - a.likes) )
-        )  
+            setBlogs( blogs.sort((a,b) => b.likes - a.likes) )
+        )
     }, [])
 
     const addNewBlog = (event) => {
         event.preventDefault()
 
         blogFormRef.current.toggleVisibility()
-        const blogObject = {title: title, author: author, url: url, likes: 0}
-    
-        blogService
-          .createBlog(blogObject)
-          .then(returnedBlog => {
-            returnedBlog = {...returnedBlog, user:user}
+        const blogObject = {
+            title: title,
+            author: author,
+            url: url,
+            likes: 0
+        }
 
-            setBlogs(blogs.concat(returnedBlog))
-            setTitle('')
-            setAuthor('')
-            setUrl('')
-            setMessage({text: "Add blog", type:1})
-            setTimeout(() => {
-              setMessage(null)
-            }, 5000)
-        })
+        blogService
+            .createBlog(blogObject)
+            .then(returnedBlog => {
+                returnedBlog = { ...returnedBlog, user:user }
+
+                setBlogs(blogs.concat(returnedBlog))
+                setTitle('')
+                setAuthor('')
+                setUrl('')
+                setMessage({
+                    text: 'Add blog',
+                    type:1
+                })
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
+            })
     }
 
     return (
@@ -45,16 +53,17 @@ const Content = ({ user, setUser, setMessage }) => {
             <User user={user} setUser={setUser} />
 
             <Togglable label={'Create new blog'} ref={blogFormRef}>
-                <BlogForm 
+                <BlogForm
                     addNewBlog={addNewBlog}
-                    title={title} setTitle={setTitle} 
-                    author={author} setAuthor={setAuthor} 
-                    url={url} setUrl={setUrl} 
+                    title={title} setTitle={setTitle}
+                    author={author} setAuthor={setAuthor}
+                    url={url} setUrl={setUrl}
                 />
             </Togglable>
-            
+
             <Blogs blogs={blogs} setBlogs={setBlogs} user={user} />
         </div>
-)}
-  
+    )
+}
+
 export default Content
