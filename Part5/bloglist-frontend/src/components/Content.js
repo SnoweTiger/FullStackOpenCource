@@ -6,10 +6,8 @@ import Blogs from './Blogs'
 import Togglable from './Togglable'
 
 const Content = ({ user, setUser, setMessage }) => {
-    const [blogs, setBlogs] = useState([])
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [url, setUrl] = useState('')
+    const [blogs, setBlogs] = useState('')
+    const [newBlog, setNewBlog] = useState('')
     const blogFormRef = useRef()
 
     useEffect(() => {
@@ -18,16 +16,9 @@ const Content = ({ user, setUser, setMessage }) => {
         )
     }, [])
 
-    const addNewBlog = (event) => {
-        event.preventDefault()
+    const addBlog = (blogObject) => {
 
         blogFormRef.current.toggleVisibility()
-        const blogObject = {
-            title: title,
-            author: author,
-            url: url,
-            likes: 0
-        }
 
         blogService
             .createBlog(blogObject)
@@ -53,12 +44,7 @@ const Content = ({ user, setUser, setMessage }) => {
             <User user={user} setUser={setUser} />
 
             <Togglable label={'Create new blog'} ref={blogFormRef}>
-                <BlogForm
-                    addNewBlog={addNewBlog}
-                    title={title} setTitle={setTitle}
-                    author={author} setAuthor={setAuthor}
-                    url={url} setUrl={setUrl}
-                />
+                <BlogForm createBlog={addBlog} />
             </Togglable>
 
             <Blogs blogs={blogs} setBlogs={setBlogs} user={user} />
