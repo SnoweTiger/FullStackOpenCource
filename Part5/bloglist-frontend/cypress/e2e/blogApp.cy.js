@@ -73,5 +73,20 @@ describe('Blog app', function() {
             cy.contains('Delete').click()
             cy.contains(testBlog.title).should('not.exist')
         })
+
+        it.only('The user who did not create a blog can not see delete button', function() {
+            cy.createBlog({ title: testBlog.title, author: testBlog.author, url: testBlog.url })
+
+            const testUser2 = {
+                name: 'Test User2',
+                username: 'testLogin2',
+                password: 'testPass2'
+            }
+            cy.request('POST', `${Cypress.env('BACKEND')}/users/`, testUser2)
+            cy.login({ username: testUser2.username, password: testUser2.password })
+            cy.visit('http://localhost:3000')
+            cy.contains('Details').click()
+            cy.contains('Delete').should('not.exist')
+        })
     })
 })
