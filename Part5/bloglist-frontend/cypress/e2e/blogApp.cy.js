@@ -36,6 +36,12 @@ describe('Blog app', function() {
 
     describe('When logged in', function() {
 
+        const testBlog = {
+            title: 'test_title',
+            author: 'test_author',
+            url: 'test_url',
+        }
+
         beforeEach(function() {
             cy.login({ username: testUser.username, password: testUser.password })
             cy.visit('http://localhost:3000')
@@ -43,11 +49,6 @@ describe('Blog app', function() {
 
         it('A blog can be created', function() {
 
-            const testBlog = {
-                title: 'test_title',
-                author: 'test_author',
-                url: 'test_url',
-            }
             cy.contains('Create new blog').click()
 
             cy.get('input[name="title"]').type(testBlog.title)
@@ -58,5 +59,13 @@ describe('Blog app', function() {
             cy.contains(testBlog.title).should('exist')
             cy.contains(testBlog.author).should('exist')
         })
+
+        it.only('A blog can be liked', function() {
+            cy.createBlog({ title: testBlog.title, author: testBlog.author, url: testBlog.url })
+            cy.contains('Details').click()
+            cy.contains('Like it!').click()
+            cy.contains('Likes: 1').should('exist')
+        })
+
     })
 })
