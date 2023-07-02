@@ -33,7 +33,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
     })
 })
 
-Cypress.Commands.add('createBlog', ({ title, author, url }) => {
+Cypress.Commands.add('createBlog', ({ title, author, url, likes }) => {
 
     cy.request({
         method: 'POST',
@@ -45,7 +45,7 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
             'title': title,
             'author': author,
             'url': url,
-            'likes': 0
+            'likes': likes
         }
     })
 })
