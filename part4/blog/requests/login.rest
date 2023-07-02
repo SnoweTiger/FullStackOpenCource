@@ -2,22 +2,14 @@
 @port = 3003
 @host = {{hostname}}:{{port}}
 
-
+@login = bugs
+@pass = bunny 
 
 ### POST Login
 POST http://{{host}}/api/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "test_test",
+    "username": "@login",
     "password": "test_pass"
-}
-
-### POST Login
-POST http://{{host}}/api/login HTTP/1.1
-Content-Type: application/json
-
-{
-    "username": "test",
-    "password": "salainen"
 }

@@ -7,7 +7,7 @@ import Togglable from './Togglable'
 
 const Content = ({ user, setUser, setMessage }) => {
     const [blogs, setBlogs] = useState('')
-    const [newBlog, setNewBlog] = useState('')
+    // const [newBlog, setNewBlog] = useState('')
     const blogFormRef = useRef()
 
     useEffect(() => {
@@ -24,11 +24,7 @@ const Content = ({ user, setUser, setMessage }) => {
             .createBlog(blogObject)
             .then(returnedBlog => {
                 returnedBlog = { ...returnedBlog, user:user }
-
                 setBlogs(blogs.concat(returnedBlog))
-                setTitle('')
-                setAuthor('')
-                setUrl('')
                 setMessage({
                     text: 'Add blog',
                     type:1
