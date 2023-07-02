@@ -60,12 +60,18 @@ describe('Blog app', function() {
             cy.contains(testBlog.author).should('exist')
         })
 
-        it.only('A blog can be liked', function() {
+        it('A blog can be liked', function() {
             cy.createBlog({ title: testBlog.title, author: testBlog.author, url: testBlog.url })
             cy.contains('Details').click()
             cy.contains('Like it!').click()
             cy.contains('Likes: 1').should('exist')
         })
 
+        it.only('The user who created a blog can delete it', function() {
+            cy.createBlog({ title: testBlog.title, author: testBlog.author, url: testBlog.url })
+            cy.contains('Details').click()
+            cy.contains('Delete').click()
+            cy.contains(testBlog.title).should('not.exist')
+        })
     })
 })
