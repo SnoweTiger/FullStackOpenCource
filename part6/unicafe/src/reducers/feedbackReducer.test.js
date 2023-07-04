@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze'
-import counterReducer from './feedbackReducer'
+import feedbackReducer from './feedbackReducer'
 
 describe('unicafe reducer', () => {
   const initialState = {
@@ -14,7 +14,7 @@ describe('unicafe reducer', () => {
       type: 'DO_NOTHING'
     }
 
-    const newState = counterReducer(undefined, action)
+    const newState = feedbackReducer(undefined, action)
     expect(newState).toEqual(initialState)
   })
 
@@ -25,7 +25,7 @@ describe('unicafe reducer', () => {
     const state = initialState
 
     deepFreeze(state)
-    const newState = counterReducer(state, action)
+    const newState = feedbackReducer(state, action)
 
     expect(newState).toEqual({ ...initialState, good: 1})
   })
@@ -37,9 +37,9 @@ describe('unicafe reducer', () => {
     const state = initialState
 
     deepFreeze(state)
-    const newState = counterReducer(state, action)
+    const newState = feedbackReducer(state, action)
 
-    expect(newState).toEqual({ ...initialState, good: 1})
+    expect(newState).toEqual({ ...initialState, ok: 1})
   })
 
   test('bad is incremented', () => {
@@ -49,9 +49,9 @@ describe('unicafe reducer', () => {
     const state = initialState
 
     deepFreeze(state)
-    const newState = counterReducer(state, action)
+    const newState = feedbackReducer(state, action)
 
-    expect(newState).toEqual({ ...initialState, good: 1})
+    expect(newState).toEqual({ ...initialState, bad: 1})
   })
 
   test('reset state', () => {
@@ -61,7 +61,7 @@ describe('unicafe reducer', () => {
     const state = initialState
 
     deepFreeze(state)
-    const newState = counterReducer(state, action)
+    const newState = feedbackReducer(state, action)
 
     expect(newState).toEqual(initialState)
   })
