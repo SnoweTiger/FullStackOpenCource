@@ -5,10 +5,10 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => {
         const search = state.filter
-        console.log(search)
-        // if ( search.length === 0) {
-        //     return state.anecdotes.sort((a,b) => b.votes - a.votes)
-        // }
+        console.log('search = ', search, typeof(search), search.length === 0)
+        if ( search.length === 0) {
+            return state.anecdotes
+        }
         const filtered = state.anecdotes.filter(str => str.content.toLowerCase().includes(search))
         return filtered.sort((a,b) => b.votes - a.votes)
     })
