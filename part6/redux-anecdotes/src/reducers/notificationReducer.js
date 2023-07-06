@@ -18,4 +18,18 @@ const notificationSlice = createSlice({
   })
 
 export const { riseNotification, resetNotification } = notificationSlice.actions
+
+export const setNotification = (message, tout) => {
+
+    return async dispatch => {
+        const delay = tout * 1000
+        dispatch(riseNotification(message))
+        setTimeout(() => {
+            dispatch(resetNotification())
+        }, delay)
+    }
+}
+
+
+
 export default notificationSlice.reducer
