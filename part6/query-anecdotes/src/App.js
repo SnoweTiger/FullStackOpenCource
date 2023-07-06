@@ -2,18 +2,12 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 
 import { useQuery } from 'react-query'
-import axios from 'axios'
+import { getAnecdotes } from './requests'
+
 
 const App = () => {
 
-    const { isLoading, isError, data, error } = useQuery(
-        'anecdotes',
-        () => axios.get('http://localhost:3001/anecdotes').then(res => res.data),
-        {
-            retry: 1
-        },
-        
-    )
+    const { isLoading, isError, data, error } = useQuery('anecdotes', getAnecdotes, {retry: 1})
     console.log(isLoading, isError, data, error)
 
     if ( isLoading ) {
