@@ -16,4 +16,14 @@ const createNew = async (content) => {
     return response.data
 }
 
-export default { getAll, createNew }
+const addVote = async (id) => {
+    const anecdotes = await axios.get(baseUrl)
+    let target = anecdotes.data.filter(anecdote => anecdote.id === id)
+    target = target[0]
+    
+    target.votes = target.votes + 1
+    await axios.put(`${baseUrl}/${id}`, target)
+    return target
+} 
+
+export default { getAll, createNew, addVote }
