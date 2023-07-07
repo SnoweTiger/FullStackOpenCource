@@ -3,7 +3,7 @@ import { createAnecdote } from '../requests'
 
 
 
-const AnecdoteForm = () => {
+const AnecdoteForm = ({dispatch}) => {
     const queryClient = useQueryClient()
 
     const newNoteMutation = useMutation(createAnecdote, {
@@ -17,6 +17,17 @@ const AnecdoteForm = () => {
         const content = event.target.anecdote.value
         event.target.anecdote.value = ''
         newNoteMutation.mutate({ content, votes: 0 })
+
+        dispatch({
+            type: 'RISE',
+            message: `Add anecdote`
+        })
+        setTimeout(() => {
+            dispatch({
+                type: 'RESET',
+                message: ''
+            })
+        }, 3000)
     }
 
     return (
