@@ -10,6 +10,18 @@ const AnecdoteForm = ({dispatch}) => {
         onSuccess: () => {
           queryClient.invalidateQueries('anecdotes')
         },
+        onError: (err) => {
+            dispatch({
+                type: 'RISE',
+                message: `Code: ${err.response.status} Error: ${err.response.data.error}`
+            })
+            setTimeout(() => {
+                dispatch({
+                    type: 'RESET',
+                    message: ''
+                })
+            }, 5000)
+        }
     })
 
     const onCreate = (event) => {
