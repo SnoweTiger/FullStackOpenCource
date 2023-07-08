@@ -31,15 +31,15 @@ const CreateNew = (props) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     content
-                    <input {...content} />
+                    <input {...(delete content.resetValue && content)} />
                 </div>
                 <div>
                     author
-                    <input {...author} />
+                    <input {...(delete author.resetValue && author)} />
                 </div>
                 <div>
                     url for more info
-                    <input {...info} />
+                    <input {...(delete info.resetValue && info)} />
                 </div>
                 <button type="submit">create</button>
                 <button type="button" onClick={() => handleReset()}>reset</button>
