@@ -1,62 +1,14 @@
 import { useState } from 'react'
 
-import {
-    BrowserRouter as Router,
-    Routes, Route
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Menu from './components/Menu'
 import About from './components/About'
 import Footer from './components/Footer'
 import AnecdoteList from './components/AnecdotesList'
 import Anecdote from './components/Anecdote'
-// const AnecdoteList = ({ anecdotes }) => (
-//     <div>
-//         <h2>Anecdotes</h2>
-//         <ul>
-//             {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
-//         </ul>
-//     </div>
-// )
-
-const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    props.addNew({
-      content,
-      author,
-      info,
-      votes: 0
-    })
-  }
-
-  return (
-    <div>
-      <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
-        </div>
-        <button>create</button>
-      </form>
-    </div>
-  )
-
-}
+import CreateNew from './components/Create'
+import Notification from './components/Notification'
 
 const App = () => {
 
@@ -81,35 +33,38 @@ const App = () => {
     const addNew = (anecdote) => {
         anecdote.id = Math.round(Math.random() * 10000)
         setAnecdotes(anecdotes.concat(anecdote))
+        setNotification(`Add new anecdote: ${ anecdote.content }`)
+        setTimeout(() => setNotification(''), 3000)
     }
 
     const anecdoteById = (id) => anecdotes.find(a => a.id === id)
 
     const vote = (id) => {
-        const anecdote = anecdoteById(id)
+      const anecdote = anecdoteById(id)
 
-        const voted = {
-            ...anecdote,
-            votes: anecdote.votes + 1
-        }
+      const voted = {
+        ...anecdote,
+        votes: anecdote.votes + 1
+      }
 
-        setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
+      setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
     }
 
     return (
-        <Router>
+        <BrowserRouter>
             <h1>Software anecdotes</h1>
             <Menu />
+            <Notification text={notification} />
             
             <Routes>
-                <Route path="/create" element={<CreateNew addNew={addNew} />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
-                <Route path="/anecdote/:id" element={<Anecdote anecdotes={anecdotes} />} />
+            <Route path="/create" element={<CreateNew addNew={addNew} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+            <Route path="/anecdote/:id" element={<Anecdote anecdotes={anecdotes} />} />
             </Routes>
 
             <Footer />    
-        </Router>
+        </BrowserRouter>
     )
 }
 
