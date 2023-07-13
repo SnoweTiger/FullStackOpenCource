@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import BlogForm from './BlogForm'
-import User from './User'
 import Blogs from './Blogs'
 import Togglable from './Togglable'
 import { setNotification } from '../reducers/notificationReducer'
@@ -21,8 +20,6 @@ const Content = () => {
 
     return (
         <div>
-            <User />
-
             <Togglable label={'Create new blog'} ref={blogFormRef}>
                 <BlogForm createBlog={addBlog} />
             </Togglable>
