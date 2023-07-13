@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux'
+
 import Blog from './Blog'
 
-const Blogs = ({ blogs, setBlogs, user }) => {
+const Blogs = ({ user }) => {
+    const blogs = useSelector((state) => state.blogs)
+
     if (blogs.length) {
         return (
             <div className="blog-cards">
@@ -9,7 +13,7 @@ const Blogs = ({ blogs, setBlogs, user }) => {
                         key={blog.id}
                         blog={blog}
                         blogs={blogs}
-                        setBlogs={setBlogs}
+                        // setBlogs={setBlogs}
                         userName={user.name}
                     />
                 ))}

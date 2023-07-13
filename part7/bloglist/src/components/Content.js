@@ -1,33 +1,23 @@
-import { useState, useEffect, useRef } from 'react'
+// import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 
-import blogService from '../services/blogs'
+// import blogService from '../services/blogs'
 import BlogForm from './BlogForm'
 import User from './User'
 import Blogs from './Blogs'
 import Togglable from './Togglable'
 import { setNotification } from '../reducers/notificationReducer'
+import { createNewBlog } from '../reducers/blogsReducer'
 
 const Content = ({ user, setUser }) => {
-    const [blogs, setBlogs] = useState('')
     const blogFormRef = useRef()
-
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        blogService
-            .getAll()
-            .then((blogs) => setBlogs(blogs.sort((a, b) => b.likes - a.likes)))
-    }, [])
 
     const addBlog = (blogObject) => {
         blogFormRef.current.toggleVisibility()
-
-        blogService.createBlog(blogObject).then((returnedBlog) => {
-            returnedBlog = { ...returnedBlog, user: user }
-            setBlogs(blogs.concat(returnedBlog))
-            dispatch(setNotification('Added new anecdote', 1, 5))
-        })
+        dispatch(createNewBlog({ ...blogObject, user: user }))
+        dispatch(setNotification('Added new anecdote', 1, 5))
     }
 
     return (
@@ -38,7 +28,7 @@ const Content = ({ user, setUser }) => {
                 <BlogForm createBlog={addBlog} />
             </Togglable>
 
-            <Blogs blogs={blogs} setBlogs={setBlogs} user={user} />
+            <Blogs user={user} />
         </div>
     )
 }

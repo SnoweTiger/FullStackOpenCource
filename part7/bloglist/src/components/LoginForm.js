@@ -2,7 +2,7 @@ import { useState } from 'react'
 import blogService from '../services/blogs'
 import loginService from '../services/login'
 
-const LoginForm = ({ setUser, setMessage }) => {
+const LoginForm = ({ setUser }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
@@ -21,13 +21,14 @@ const LoginForm = ({ setUser, setMessage }) => {
             setUsername('')
             setPassword('')
         } catch (exception) {
-            setMessage({
-                text: exception.response.data.error,
-                type: 0,
-            })
-            setTimeout(() => {
-                setMessage(null)
-            }, 5000)
+            console.log(exception.response.data.error)
+            // setMessage({
+            //     text: exception.response.data.error,
+            //     type: 0,
+            // })
+            // setTimeout(() => {
+            //     setMessage(null)
+            // }, 5000)
         }
     }
 
