@@ -9,13 +9,7 @@ const Blogs = ({ user }) => {
         return (
             <div className="blog-cards">
                 {blogs.map((blog) => (
-                    <Blog
-                        key={blog.id}
-                        blog={blog}
-                        blogs={blogs}
-                        // setBlogs={setBlogs}
-                        userName={user.name}
-                    />
+                    <Blog key={blog.id} blog={blog} userName={user.name} />
                 ))}
             </div>
         )

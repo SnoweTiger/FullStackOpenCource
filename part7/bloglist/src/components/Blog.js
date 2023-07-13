@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import blogService from '../services/blogs'
 import { setNotification } from '../reducers/notificationReducer'
+import { likeBlog, deleteBlog } from '../reducers/blogsReducer'
 
-const Blog = ({ blog, userName, blogs, setBlogs }) => {
+const Blog = ({ blog, userName }) => {
     const [visible, setVisible] = useState(false)
     const dispatch = useDispatch()
 
@@ -12,21 +12,14 @@ const Blog = ({ blog, userName, blogs, setBlogs }) => {
     const showWhenVisible = { display: visible ? '' : 'none' }
 
     const likeHandler = (id) => {
-        const blogObject = blog
-        blogObject.likes = blogObject.likes + 1
-
-        blogService.updateBlog(id, blogObject).then((returnedBlog) => {
-            let tmpBlogs = blogs.map((b) => (b.id === id ? returnedBlog : b))
-            setBlogs(tmpBlogs.sort((a, b) => b.likes - a.likes))
-        })
+        const updatedBlog = { ...blog }
+        updatedBlog.likes = updatedBlog.likes + 1
+        dispatch(likeBlog(id, updatedBlog))
         dispatch(setNotification('Blog liked', 1, 5))
     }
 
     const deleteHandler = (id) => {
-        console.log(id)
-        blogService.deleteBlog(id).then(() => {
-            setBlogs(blogs.filter((b) => b.id !== id))
-        })
+        dispatch(deleteBlog(id))
         dispatch(setNotification(`Blog ${id} deleted`, 0, 5))
     }
 

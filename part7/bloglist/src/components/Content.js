@@ -1,8 +1,6 @@
-// import { useState, useEffect, useRef } from 'react'
 import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 
-// import blogService from '../services/blogs'
 import BlogForm from './BlogForm'
 import User from './User'
 import Blogs from './Blogs'
