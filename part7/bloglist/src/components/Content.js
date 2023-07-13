@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+
 import blogService from '../services/blogs'
 import BlogForm from './BlogForm'
 import User from './User'
 import Blogs from './Blogs'
 import Togglable from './Togglable'
+import { setNotification } from '../reducers/notificationReducer'
 
-const Content = ({ user, setUser, setMessage }) => {
+const Content = ({ user, setUser }) => {
     const [blogs, setBlogs] = useState('')
-    // const [newBlog, setNewBlog] = useState('')
     const blogFormRef = useRef()
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         blogService
@@ -22,13 +26,7 @@ const Content = ({ user, setUser, setMessage }) => {
         blogService.createBlog(blogObject).then((returnedBlog) => {
             returnedBlog = { ...returnedBlog, user: user }
             setBlogs(blogs.concat(returnedBlog))
-            setMessage({
-                text: 'Add blog',
-                type: 1,
-            })
-            setTimeout(() => {
-                setMessage(null)
-            }, 5000)
+            dispatch(setNotification('Added new anecdote', 1, 5))
         })
     }
 
