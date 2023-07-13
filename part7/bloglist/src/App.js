@@ -1,24 +1,17 @@
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-
-import blogService from './services/blogs'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Content from './components/Content'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
+
 import { initializeBlogs } from './reducers/blogsReducer'
+import { loadUser } from './reducers/userReducer'
 
 const App = () => {
-    const [user, setUser] = useState(null)
-    // const [message, setMessage] = useState(null)
-
+    const user = useSelector((state) => state.user)
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem('BlogUser')
-        if (loggedUserJSON) {
-            const user = JSON.parse(loggedUserJSON)
-            setUser(user)
-            blogService.setToken(user.token)
-        }
+        dispatch(loadUser(user))
     }, [])
 
     const dispatch = useDispatch()
@@ -30,8 +23,8 @@ const App = () => {
         <div>
             <h2>Blogs</h2>
             <Notification />
-            {user !== null && <Content user={user} setUser={setUser} />}
-            {user === null && <LoginForm setUser={setUser} />}
+            {user !== null && <Content user={user} />}
+            {user === null && <LoginForm />}
         </div>
     )
 }
