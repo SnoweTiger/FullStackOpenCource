@@ -42,7 +42,9 @@ export const loadUser = () => {
             dispatch(setUser(user))
         }
     } else {
-        return null
+        return async (dispatch) => {
+            dispatch(resetUser())
+        }
     }
 }
 
