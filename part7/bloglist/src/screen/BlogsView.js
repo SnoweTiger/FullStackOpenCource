@@ -2,16 +2,16 @@ import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import BlogForm from '../components/BlogForm'
-import Togglable from '../components/Togglable'
 import Blogs from '../components/Blogs'
+import Togglable from '../components/Togglable'
 
 import { setNotification } from '../reducers/notificationReducer'
 import { createNewBlog } from '../reducers/blogsReducer'
 
 const BlogsView = () => {
     const blogFormRef = useRef()
-    const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
+    const dispatch = useDispatch()
 
     const addBlog = (blogObject) => {
         blogFormRef.current.toggleVisibility()

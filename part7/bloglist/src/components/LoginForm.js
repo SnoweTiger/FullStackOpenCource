@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 import loginService from '../services/login'
-
 import { loginUser } from '../reducers/userReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
@@ -26,27 +27,31 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={handleLogin}>
-            <div>
-                username
-                <input
+        <Form onSubmit={handleLogin} style={{ paddingBottom: 5 }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
                     type="text"
+                    placeholder="username"
                     value={username}
-                    name="Username"
                     onChange={({ target }) => setUsername(target.value)}
+                    required
                 />
-            </div>
-            <div>
-                password
-                <input
-                    type="password"
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="password"
                     value={password}
-                    name="Password"
                     onChange={({ target }) => setPassword(target.value)}
+                    required
                 />
-            </div>
-            <button type="submit">login</button>
-        </form>
+            </Form.Group>
+            <Button variant="outline-primary" type="submit">
+                Login
+            </Button>
+        </Form>
     )
 }
 

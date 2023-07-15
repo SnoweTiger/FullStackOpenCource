@@ -32,22 +32,24 @@ const App = () => {
     }, [dispatch2])
 
     return (
-        <BrowserRouter>
-            <h2>Blogs</h2>
-            <Notification />
-            {user !== null && (
-                <div>
-                    <Menu />
-                    <Routes>
-                        <Route path="/" element={<BlogsView />} />
-                        <Route path="/blog/:id" element={<BlogView />} />
-                        <Route path="/users" element={<UsersView />} />
-                        <Route path="/user/:id" element={<UserView />} />
-                    </Routes>
-                </div>
-            )}
-            {user === null && <LoginForm />}
-        </BrowserRouter>
+        <div className="container">
+            <BrowserRouter>
+                <h2>Blogs</h2>
+                <Notification />
+                {user !== null && (
+                    <div className="container">
+                        <Menu />
+                        <Routes>
+                            <Route path="/" element={<BlogsView />} />
+                            <Route path="/blog/:id" element={<BlogView />} />
+                            <Route path="/users" element={<UsersView />} />
+                            <Route path="/user/:id" element={<UserView />} />
+                        </Routes>
+                    </div>
+                )}
+                {user === null && <LoginForm />}
+            </BrowserRouter>
+        </div>
     )
 }
 

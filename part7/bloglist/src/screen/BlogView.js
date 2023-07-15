@@ -1,8 +1,9 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setNotification } from '../reducers/notificationReducer'
 import { likeBlog, deleteBlog } from '../reducers/blogsReducer'
+import Button from 'react-bootstrap/Button'
 
 const BlogView = () => {
     const id = useParams().id
@@ -26,17 +27,25 @@ const BlogView = () => {
     return (
         <div>
             <h3>{blog.title}</h3>
-            <p>{blog.url}</p>
+            <Link to={blog.url}>{blog.url}</Link>
             <p>
-                {blog.likes} likes
-                <button onClick={() => likeHandler(blog.id)}>Like</button>
+                {blog.likes} likes &nbsp;
+                <Button
+                    variant="outline-primary"
+                    onClick={() => likeHandler(blog.id)}
+                >
+                    Like
+                </Button>
             </p>
             <p>
-                Added by {blog.user.name}
+                Added by {blog.user.name} &nbsp;
                 {user.username === blog.user.username && (
-                    <button onClick={() => deleteHandler(blog.id)}>
+                    <Button
+                        variant="outline-danger"
+                        onClick={() => deleteHandler(blog.id)}
+                    >
                         Delete
-                    </button>
+                    </Button>
                 )}
             </p>
         </div>

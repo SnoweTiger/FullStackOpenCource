@@ -1,22 +1,30 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Table from 'react-bootstrap/Table'
 
 const Users = () => {
     const users = useSelector((state) => state.users)
 
     if (users && users.length) {
         return (
-            <div className="blog-cards">
-                <ul>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <td>User</td>
+                        <td>Published blogs</td>
+                    </tr>
+                </thead>
+                <tbody>
                     {users.map((user) => (
-                        <li key={user.id}>
-                            <Link to={`/user/${user.id}`}>
-                                {user.name} - blogs {user.blogs.length}
-                            </Link>
-                        </li>
+                        <tr key={user.id}>
+                            <td>
+                                <Link to={`/user/${user.id}`}>{user.name}</Link>
+                            </td>
+                            <td>{user.blogs.length}</td>
+                        </tr>
                     ))}
-                </ul>
-            </div>
+                </tbody>
+            </Table>
         )
     } else {
         return null

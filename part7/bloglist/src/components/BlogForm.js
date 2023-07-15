@@ -1,5 +1,8 @@
 import { useState } from 'react'
 
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 const BlogForm = ({ createBlog }) => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
@@ -21,40 +24,41 @@ const BlogForm = ({ createBlog }) => {
     }
 
     return (
-        <div>
-            <form onSubmit={addBlog}>
-                <div>
-                    title:
-                    <input
-                        type="text"
-                        name="title"
-                        value={title}
-                        onChange={({ target }) => setTitle(target.value)}
-                    />
-                </div>
-                <div>
-                    author:
-                    <input
-                        type="text"
-                        name="author"
-                        value={author}
-                        onChange={({ target }) => setAuthor(target.value)}
-                    />
-                </div>
-                <div>
-                    url:
-                    <input
-                        type="text"
-                        name="url"
-                        value={url}
-                        onChange={({ target }) => setUrl(target.value)}
-                    />
-                </div>
-                <div>
-                    <button type="submit">save</button>
-                </div>
-            </form>
-        </div>
+        <Form onSubmit={addBlog} style={{ paddingBottom: 5 }}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="title"
+                    value={title}
+                    onChange={({ target }) => setTitle(target.value)}
+                    required
+                />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Author</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="author"
+                    value={author}
+                    onChange={({ target }) => setAuthor(target.value)}
+                    required
+                />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="url"
+                    value={url}
+                    onChange={({ target }) => setUrl(target.value)}
+                    required
+                />
+            </Form.Group>
+            <Button variant="outline-success" type="submit">
+                save
+            </Button>
+        </Form>
     )
 }
 
