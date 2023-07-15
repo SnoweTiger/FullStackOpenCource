@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
-import User from './components/User'
+import Menu from './components/Menu'
 
 import UsersView from './screen/UsersView'
 import UserView from './screen/UserView'
@@ -37,7 +37,7 @@ const App = () => {
             <Notification />
             {user !== null && (
                 <div>
-                    <User />
+                    <Menu />
                     <Routes>
                         <Route path="/" element={<BlogsView />} />
                         <Route path="/blog/:id" element={<BlogView />} />
