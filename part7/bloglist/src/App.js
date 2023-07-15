@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Content from './components/Content'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
 import User from './components/User'
 
 import UsersView from './screen/UsersView'
 import UserView from './screen/UserView'
+import BlogsView from './screen/BlogsView'
+import BlogView from './screen/BlogView'
 
 import { loadUser } from './reducers/userReducer'
 import { initializeBlogs } from './reducers/blogsReducer'
@@ -35,15 +36,15 @@ const App = () => {
             <h2>Blogs</h2>
             <Notification />
             {user !== null && (
-                <>
-                    {/* <Content /> */}
+                <div>
                     <User />
                     <Routes>
-                        <Route path="/" element={<Content />} />
+                        <Route path="/" element={<BlogsView />} />
+                        <Route path="/blog/:id" element={<BlogView />} />
                         <Route path="/users" element={<UsersView />} />
                         <Route path="/user/:id" element={<UserView />} />
                     </Routes>
-                </>
+                </div>
             )}
             {user === null && <LoginForm />}
         </BrowserRouter>
