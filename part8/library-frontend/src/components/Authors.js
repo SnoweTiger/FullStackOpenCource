@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { ALL_AUTHORS, UPDATE_AUTHOR } from "../queries";
+import Select from "react-select";
 
-const NewAuthorForm = () => {
-  const [name, setName] = useState("");
+const NewAuthorForm = ({ authors }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
   const [born, setBorn] = useState("");
   const [updatedAuthor] = useMutation(UPDATE_AUTHOR, {
     refetchQueries: [{ query: ALL_AUTHORS }],
   });
 
+  const authorOptions = authors.map((a) => ({ value: a.name, label: a.name }));
+
   const submit = async (event) => {
     event.preventDefault();
 
-    updatedAuthor({ variables: { name, born } });
+    updatedAuthor({ variables: { name: selectedOption.value, born: born } });
 
-    setName("");
     setBorn("");
+    setSelectedOption(null);
   };
 
   return (
@@ -23,9 +26,10 @@ const NewAuthorForm = () => {
       <form onSubmit={submit}>
         <div>
           Name
-          <input
-            value={name}
-            onChange={({ target }) => setName(target.value)}
+          <Select
+            defaultValue={selectedOption}
+            onChange={setSelectedOption}
+            options={authorOptions}
           />
         </div>
         <div>
@@ -72,7 +76,7 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      <NewAuthorForm />
+      <NewAuthorForm authors={result.data.allAuthors} />
     </div>
   );
 };
