@@ -76,7 +76,7 @@ const Authors = (props) => {
           ))}
         </tbody>
       </table>
-      <NewAuthorForm authors={result.data.allAuthors} />
+      {props.token ? <NewAuthorForm authors={result.data.allAuthors} /> : null}
     </div>
   );
 };
