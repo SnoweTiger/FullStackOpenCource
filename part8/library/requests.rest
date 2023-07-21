@@ -1,3 +1,49 @@
+### Create user
+POST http://localhost:4000/
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  createUser (
+    username: "mluukkai"
+    favoriteGenre: "Comedy"
+  ) {
+    username
+    id
+  }
+}
+
+### Login
+# @name login
+POST http://localhost:4000/
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+  login (
+    username: "mluukkai"
+    password: "secret"
+  ) {
+    value
+  }
+}
+
+### Me
+@token = {{login.response.body.data.login.value}}
+POST http://localhost:4000/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+X-REQUEST-TYPE: GraphQL
+
+query {
+  me {
+    username
+    favoriteGenre
+    id
+  }
+}
+
+### Get authors
 POST http://localhost:4000/
 Content-Type: application/json
 Authorization: Bearer xxx
@@ -8,7 +54,7 @@ query Counts {
   bookCount
 }
 
-###
+### Get books
 POST http://localhost:4000/
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -24,14 +70,15 @@ mutation AddAuthor {
   }
 }
 
-###
+### Add book
 POST http://localhost:4000/
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
+Authorization: Bearer {{token}}
 
-mutation AddAuthor {
+mutation AddBook {
   addBook(
-    title: "Test2 Book",
+    title: "Test Book",
     author: "Bobik",
     published: 1905,
     genres: [
