@@ -7,3 +7,44 @@ query Counts {
   authorCount
   bookCount
 }
+
+###
+POST http://localhost:4000/
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation AddAuthor {
+  addAuthor(
+    name: "T",
+    born: 1000
+  ) {
+    id
+    name
+    born
+  }
+}
+
+###
+POST http://localhost:4000/
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation AddAuthor {
+  addBook(
+    title: "Test2 Book",
+    author: "Bobik",
+    published: 1905,
+    genres: [
+      "Comedy",
+      "Drama"
+    ]
+  ) {
+    title
+    published
+    id
+    author {
+      name
+      id
+    }
+  }
+}
