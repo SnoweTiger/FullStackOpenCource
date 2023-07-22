@@ -158,7 +158,9 @@ const resolvers = {
         author = await newAuthor.save();
       }
 
-      const book = new Book({ ...args, author: author });
+      // const book = new Book({ ...args, author: author });
+      const book = new Book({ ...args });
+      book.author = author;
 
       try {
         await book.save();

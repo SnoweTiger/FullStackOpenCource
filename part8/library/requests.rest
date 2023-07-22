@@ -98,11 +98,10 @@ Authorization: Bearer {{token}}
 
 mutation AddBook {
   addBook(
-    title: "Test Book",
+    title: "Test Book4",
     author: "Bobik",
-    published: 1905,
+    published: 2000,
     genres: [
-      "Comedy",
       "Drama"
     ]
   ) {

@@ -22,6 +22,7 @@ export const ALL_BOOKS = gql`
         id
         born
       }
+      genres
     }
   }
 `;
@@ -39,7 +40,9 @@ export const ADD_BOOK = gql`
       published: $published
       genres: $genres
     ) {
-      author
+      author {
+        name
+      }
       id
       published
       title
