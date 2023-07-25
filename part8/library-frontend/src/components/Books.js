@@ -1,6 +1,7 @@
 import { useState } from "react";
 // import { useQuery } from "@apollo/client";
 import { useQuery, useSubscription } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 
 import Select from "react-select";
 
@@ -10,10 +11,19 @@ import BookTable from "./BookTable";
 const Books = (props) => {
   const result = useQuery(ALL_BOOKS);
   const [selectedGenre, setSelectedGenre] = useState("All");
+  const client = useApolloClient();
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data }) => {
-      console.log(data);
+      console.log(data.data);
+      const addedBook = data.data.bookAdded;
+      console.log(addedBook);
+
+      client.cache.updateQuery({ query: ALL_BOOKS }, ({ allBooks }) => {
+        return {
+          allBooks: allBooks.concat(addedBook),
+        };
+      });
     },
   });
 
