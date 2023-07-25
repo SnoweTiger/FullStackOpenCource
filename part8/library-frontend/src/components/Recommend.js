@@ -1,21 +1,12 @@
 import { useState } from "react";
-// import { useQuery } from "@apollo/client";
-import { useQuery, useSubscription } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
-import Select from "react-select";
-
-import { ALL_BOOKS, BOOK_ADDED } from "../queries";
+import { ALL_BOOKS } from "../queries";
 import BookTable from "./BookTable";
 
-const Books = (props) => {
+const Recommend = (props) => {
   const result = useQuery(ALL_BOOKS);
   const [selectedGenre, setSelectedGenre] = useState("All");
-
-  useSubscription(BOOK_ADDED, {
-    onData: ({ data }) => {
-      console.log(data);
-    },
-  });
 
   if (!props.show) {
     return null;
@@ -34,15 +25,11 @@ const Books = (props) => {
 
   return (
     <div>
-      <h2>Books</h2>
-      <Select
-        options={genreOptions}
-        value={selectedGenre}
-        onChange={changeGenre}
-      />
+      <h2>Recommendation</h2>
+      <p>Your favorite genre {}</p>
       <BookTable books={result.data.allBooks} genre={selectedGenre} />
     </div>
   );
 };
 
-export default Books;
+export default Recommend;

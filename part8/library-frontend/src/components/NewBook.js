@@ -19,7 +19,15 @@ const NewBook = (props) => {
   const submit = async (event) => {
     event.preventDefault();
 
-    addBook({ variables: { title, author, published, genres } });
+    const newBook = {
+      title: "Test Book5",
+      author: "Bobik",
+      published: 2000,
+      genres: ["Drama"],
+    };
+    addBook({ variables: newBook });
+
+    // addBook({ variables: { title, author, published, genres } });
 
     setTitle("");
     setPublished("");
