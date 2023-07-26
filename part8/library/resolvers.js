@@ -13,7 +13,9 @@ const resolvers = {
     dummy: () => 0,
     bookCount: async () => Book.collection.countDocuments(),
     authorCount: async () => Author.collection.countDocuments(),
-    allAuthors: async (root, args) => await Author.find({}),
+    allAuthors: async (root, args) => {
+      return await Author.find({}).populate("books");
+    },
     allBooks: async (root, args) => {
       let books = await Book.find({}).populate("author", {
         name: 1,
@@ -158,6 +160,16 @@ const resolvers = {
   Subscription: {
     bookAdded: {
       subscribe: () => pubsub.asyncIterator("BOOK_ADDED"),
+    },
+  },
+
+  Author: {
+    bookCount: async (root) => {
+      if (root.books) {
+        return root.books.lenght;
+      } else {
+        return 0;
+      }
     },
   },
 };

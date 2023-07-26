@@ -28,6 +28,25 @@ query AllBooks {
     }
 }
 
+###
+POST http://localhost:4000/
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query allAuthors {
+  allAuthors
+  {
+    name
+    id
+    born
+    books {
+      title
+    }
+    bookCount
+  }
+}
+
+
 ### Create user
 POST http://localhost:4000/
 Content-Type: application/json
@@ -77,15 +96,17 @@ query {
 POST http://localhost:4000/
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
+Authorization: Bearer {{token}}
 
 mutation AddAuthor {
   addAuthor(
-    name: "T",
+    name: "Gosha",
     born: 1000
   ) {
     id
     name
     born
+    bookCount
   }
 }
 
@@ -97,8 +118,8 @@ Authorization: Bearer {{token}}
 
 mutation AddBook {
   addBook(
-    title: "Test Book4",
-    author: "Bobik",
+    title: "Test Book12",
+    author: "Gosha",
     published: 2000,
     genres: [
       "Drama"
