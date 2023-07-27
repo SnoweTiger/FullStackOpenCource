@@ -33,7 +33,7 @@ const calculateExercises = (exercises: number[], target: number): exercisesMetri
         trainingDays: exercises.filter(a => a > 0).length,
         success: (average >= target) ? true : false,
         rating: rate,
-        ratingDescription: ratings[rate],
+        ratingDescription: ratings[rate-1],
         target: target,
         average: average
     }
@@ -41,5 +41,7 @@ const calculateExercises = (exercises: number[], target: number): exercisesMetri
     return res
 }
 
-const test : number[] = [3, 0, 2, 4.5, 0, 3, 1]
-console.log(calculateExercises(test, 2))
+if (process.argv.length < 4) throw new Error('Not enough arguments');
+const test: number[] = process.argv.slice(3).map(x => Number(x))
+
+console.log(calculateExercises(test, Number(process.argv[3])))
