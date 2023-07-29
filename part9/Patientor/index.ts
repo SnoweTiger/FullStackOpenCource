@@ -1,5 +1,6 @@
 import express from 'express';
 import diagnosesService from './services/diagnosesService';
+import patientsService from './services/patientsService';
 
 const app = express();
 const cors = require('cors')
@@ -17,6 +18,11 @@ app.get('/api/ping', (_req, res) => {
 app.get('/api/diagnoses', (_req, res) => {
   console.log('someone pinged here');
   res.send(diagnosesService.getDiagnoses());
+});
+
+app.get('/api/patients', (_req, res) => {
+  console.log('someone pinged here');
+  res.send(patientsService.getPatients());
 });
 
 app.listen(PORT, () => {
