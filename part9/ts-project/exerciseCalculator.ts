@@ -41,7 +41,9 @@ const calculateExercises = (exercises: number[], target: number): exercisesMetri
     return res
 }
 
-if (process.argv.length < 4) throw new Error('Not enough arguments');
-const test: number[] = process.argv.slice(3).map(x => Number(x))
+// if (process.argv.length < 4) throw new Error('Not enough arguments');
+// const test: number[] = process.argv.slice(3).map(x => Number(x))
 
-console.log(calculateExercises(test, Number(process.argv[3])))
+// console.log(calculateExercises(test, Number(process.argv[3])))
+
+export default calculateExercises
