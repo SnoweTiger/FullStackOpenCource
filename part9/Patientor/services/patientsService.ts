@@ -10,15 +10,6 @@ const getPatients = (): NonSensitivePatients[] => {
   ));
 };
 
-// const addPatient = (name: string, dateOfBirth: string, ssn: string, gender: string, occupation: string): NonSensitivePatients => {
-  // const newPatient: Patients = {
-  //   id: uuid(),
-  //   name: name,
-  //   dateOfBirth: dateOfBirth,
-  //   ssn: ssn,
-  //   gender: gender,
-  //   occupation: occupation
-  // }
 const addPatient = (patient: NewPatients): NonSensitivePatients => {
   
   const addedPatient = {
