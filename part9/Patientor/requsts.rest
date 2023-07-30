@@ -16,3 +16,73 @@ Content-Type: application/json
   "occupation": "Test"
 }
 
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "dateOfBirth": "Test", 
+  "ssn": "Test", 
+  "gender": "male", 
+  "occupation": "Test"
+}
+
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": 1, 
+  "dateOfBirth": "Test", 
+  "ssn": "Test", 
+  "gender": "male", 
+  "occupation": "Test"
+}
+
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Test", 
+  "dateOfBirth": 2, 
+  "ssn": "Test", 
+  "gender": "male", 
+  "occupation": "Test"
+}
+
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Test", 
+  "dateOfBirth": "Test", 
+  "ssn": 3, 
+  "gender": "male", 
+  "occupation": "Test"
+}
+
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Test", 
+  "dateOfBirth": "Test", 
+  "ssn": "Test", 
+  "gender": 3, 
+  "occupation": "Test"
+}
+
+### Add new patient
+POST http://localhost:3001/api/patients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Test", 
+  "dateOfBirth": "Test", 
+  "ssn": "Test", 
+  "gender": "male", 
+  "occupation": 4
+}

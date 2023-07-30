@@ -1,6 +1,6 @@
 import { v1 as uuid } from 'uuid' 
 import patientsData from '../data/patients';
-import { Patients, NonSensitivePatients } from '../types';
+import { Patients, NonSensitivePatients, NewPatients } from '../types';
 
 const patients: Patients[] = patientsData;
 
@@ -10,24 +10,28 @@ const getPatients = (): NonSensitivePatients[] => {
   ));
 };
 
-const addPatient = (name: string, dateOfBirth: string, ssn: string, gender: string, occupation: string): NonSensitivePatients => {
-  const newPatient: Patients = {
+// const addPatient = (name: string, dateOfBirth: string, ssn: string, gender: string, occupation: string): NonSensitivePatients => {
+  // const newPatient: Patients = {
+  //   id: uuid(),
+  //   name: name,
+  //   dateOfBirth: dateOfBirth,
+  //   ssn: ssn,
+  //   gender: gender,
+  //   occupation: occupation
+  // }
+const addPatient = (patient: NewPatients): NonSensitivePatients => {
+  
+  const addedPatient = {
     id: uuid(),
-    name: name,
-    dateOfBirth: dateOfBirth,
-    ssn: ssn,
-    gender: gender,
-    occupation: occupation
+    ...patient
   }
-
-  patients.push(newPatient);
-  // return newPatient;
+  patients.push(addedPatient);
   return {
-    id: newPatient.id,
-    name: newPatient.name,
-    dateOfBirth: newPatient.dateOfBirth,
-    gender: newPatient.gender,
-    occupation: newPatient.occupation
+    id: addedPatient.id,
+    name: addedPatient.name,
+    dateOfBirth: addedPatient.dateOfBirth,
+    gender: addedPatient.gender,
+    occupation: addedPatient.occupation
   }
 }
 
