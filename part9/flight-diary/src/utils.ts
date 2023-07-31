@@ -9,7 +9,6 @@ const parseComment = (comment: unknown): string => {
   if (!isString(comment)) {
     throw new Error('Incorrect or missing comment');
   }
-
   return comment;
 };
 
@@ -17,6 +16,7 @@ const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
+// 
 const parseDate = (date: unknown): string => {
   if (!isString(date) || !isDate(date)) {
       throw new Error('Incorrect date: ' + date);
@@ -47,9 +47,23 @@ const parseVisibility = (visibility: unknown): Visibility => {
 };
 
 const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+
   if ( !object || typeof object !== 'object' ) {
     throw new Error('Incorrect or missing data');
   }
+
+  // if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object) {
+  //   const newEntry: NewDiaryEntry = {
+  //     weather: object.weather,
+  //     visibility: object.visibility,
+  //     date: object.date,
+  //     comment: object.comment
+  //   };
+  
+  //   return newEntry;
+  // }
+  
+  
 
   if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
     const newEntry: NewDiaryEntry = {

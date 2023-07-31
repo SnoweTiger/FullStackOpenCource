@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Diary } from "../types";
+import { Diary, DiaryFormValues } from "../types";
 
 const apiBaseUrl = 'http://localhost:3000'
 
@@ -8,17 +8,15 @@ const getAll = async () => {
   return data;
 };
 
-// const create = async (object: PatientFormValues) => {
-//   const { data } = await axios.post<Patient>(
-//     `${apiBaseUrl}/patients`,
-//     object
-//   );
-
-//   return data;
-// };
+const addNew = async (object: DiaryFormValues) => {
+  console.log(object)
+  const { data } = await axios.post<Diary>(`${apiBaseUrl}/api/diaries`, { ...object, comment:'' });
+  console.log(data)
+  return data;
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     getAll,
-    // create
+    addNew
 };
