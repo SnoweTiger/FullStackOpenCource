@@ -86,3 +86,7 @@ Content-Type: application/json
   "gender": "male", 
   "occupation": 4
 }
+
+### get patient
+GET http://localhost:3001/api/patients/d2773336-f723-11e9-8f0b-362b9e155667 HTTP/1.1
+Content-Type: application/json
