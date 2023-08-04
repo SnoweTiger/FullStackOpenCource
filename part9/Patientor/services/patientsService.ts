@@ -1,8 +1,9 @@
 import { v1 as uuid } from 'uuid' 
-import patientsData from '../data/patients';
-import { NonSensitivePatient, NewPatients, PatientWithEntries } from '../types';
+// import patientsData from '../data/patients';
+import patientsData from '../data/patients-full';
+import { NonSensitivePatient, NewPatient, Patient, PatientWithEntries } from '../types';
 
-const patients: NonSensitivePatient[] = patientsData;
+const patients: Patient[] = patientsData;
 
 const getPatients = (): NonSensitivePatient[] => {
   return patients.map(({ id, name, dateOfBirth, gender, occupation }) => (
@@ -10,10 +11,11 @@ const getPatients = (): NonSensitivePatient[] => {
   ));
 };
 
-const addPatient = (patient: NewPatients): NonSensitivePatient => {
+const addPatient = (patient: NewPatient): NonSensitivePatient => {
   
-  const addedPatient = {
+  const addedPatient: Patient = {
     id: uuid(),
+    entries: [],
     ...patient
   }
   patients.push(addedPatient);
@@ -26,10 +28,10 @@ const addPatient = (patient: NewPatients): NonSensitivePatient => {
   }
 }
 
-const getById = (id: String): PatientWithEntries | null => {
+const getById = (id: String): Patient | null => {
   const targetPatients = patients.find(p => p.id === id)
   if (targetPatients) {
-    return { ...targetPatients, entries: [] }
+    return targetPatients
   } else {
     return null
   }
