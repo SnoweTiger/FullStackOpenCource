@@ -1,34 +1,54 @@
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Link } from "react-router-native";
 import Constants from 'expo-constants';
 
+import theme from '../theme';
+import Text from './Text';
+
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: Constants.statusBarHeight,
-        zIndex: 50,
-        backgroundColor: '#24292e',
-        flexDirection: 'row',
-    },
-    text: {
-        color: 'white',
-    }
+  container: {
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: theme.colors.appBarBackground,
+  },
+  scrollView: {
+    flexDirection: 'row',
+  },
+  tabTouchable: {
+    flexGrow: 0,
+  },
+  tabContainer: {
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabText: {
+    color: 'white',
+  },
 });
 
+const AppBarTab = ({ children, ...props }) => {
+  return (
+    <Link style={styles.tabTouchable} {...props}>
+      <View style={styles.tabContainer}>
+        <Text fontWeight="bold" style={styles.tabText}>
+          {children}
+        </Text>
+      </View>
+    </Link>
+  );
+};
+
 const AppBar = () => {
-    return (
-        <View style={styles.container}>
-            <ScrollView horizontal>{/* ... */}
-                <Link to="/">
-                    <Text style={styles.text}>Repositories</Text>
-                </Link>
-                <Link to="/sigin">
-                    <Text style={styles.text}>SigIn</Text>
-                </Link>
-            </ScrollView>
-            {/* <Text>ddd</Text> */}
-            
-        </View>
-    )       
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView} horizontal>
+        <AppBarTab to="/">Repositories</AppBarTab>
+        <AppBarTab to="/sign-in">Sign in</AppBarTab>
+      </ScrollView>
+    </View>
+  );
 };
 
 export default AppBar;
