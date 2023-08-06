@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         // marginTop: Constants.statusBarHeight,
         flexGrow: 1,
         flexShrink: 1,
-        zIndex: 5,
+        backgroundColor: '#e1e4e8',
     },
     
 });
