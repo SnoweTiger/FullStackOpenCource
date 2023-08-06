@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexShrink: 1,
         backgroundColor: '#e1e4e8',
+        // fontFamily: 'Arial',
+        fontFamily: Platform.select({
+            android: 'Roboto',
+            ios: 'Arial',
+            default: 'System',
+    }),
     },
     
 });
